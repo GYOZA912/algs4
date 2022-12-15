@@ -1,20 +1,6 @@
 import edu.princeton.cs.algs4.WeightedQuickUnionUF;
 
 public class Percolation {
-    /**
-     * Corner cases:
-     * By convention, the row and column indices are integers
-     * between 1 and n, where (1, 1) is the upper-left site: Throw an
-     * IllegalArgumentException if any argument to open(), isOpen(), or
-     * isFull() is outside its prescribed range. Throw a
-     * IllegalArgumentException in the constructor if n ≤ 0.
-     */
-
-    /** Performance requirements:
-     *  The constructor must take time proportional to n2; all instance
-     *  methods must take constant time plus a constant number of calls to
-     *  union() and find().
-     */
 
     private boolean[] openStatus;
     private WeightedQuickUnionUF uf;
@@ -23,8 +9,8 @@ public class Percolation {
     private int n;
     private int cnt; // count the open sites;
 
-    // creates n-by-n grid, with all sites initially blocked
-    // each site is named by (row - 1) * n + column
+    // Creates n-by-n grid, with all sites initially blocked
+    // Each site is named after (row - 1) * n + column
     // There would be extra grids for the dummy nodes.
     public Percolation(int n) {
         if (n <= 0) {
@@ -36,7 +22,7 @@ public class Percolation {
         size = n * n + 2; // n*n grids plus two dummy
         openStatus = new boolean[size];
         uf = new WeightedQuickUnionUF(size);
-        ufWithoutRoot = new WeightedQuickUnionUF(size - 1);
+        ufWithoutRoot = new WeightedQuickUnionUF(size - 1); // For isFull
         for (int i = 0; i < size; i++) {
             openStatus[i] = false;
         }
@@ -52,11 +38,12 @@ public class Percolation {
             uf.union(0, i);
             ufWithoutRoot.union(0, i);
 
-
             uf.union(n * n - n + i, n * n + 1);
         }
 
     }
+    
+    // Coordinate to index
     private int locate(int row, int col) {
         return (row - 1) * n + col;
     }
@@ -68,6 +55,7 @@ public class Percolation {
                     "is: " + col);
         }
     }
+    
     // opens the site (row, col) if it is not open already
     public void open(int row, int col) {
         validateLocation(row, col);
