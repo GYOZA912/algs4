@@ -24,8 +24,8 @@ public class Percolation {
     private int cnt; // count the open sites;
 
     // creates n-by-n grid, with all sites initially blocked
-    // each site is named by row * n + column
-    // All array are of two extra grids for the dummy nodes.
+    // each site is named by (row - 1) * n + column
+    // There would be extra grids for the dummy nodes.
     public Percolation(int n) {
         if (n <= 0) {
             throw new IllegalArgumentException("n has to be positive integer");
