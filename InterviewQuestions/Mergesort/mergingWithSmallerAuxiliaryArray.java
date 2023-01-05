@@ -8,7 +8,7 @@ import java.util.Arrays;
  *
  * Hint: copy only the left half into the auxiliary array.
  */
-public class MergingWithSmallerAuxiliaryArray {
+public class mergingWithSmallerAuxiliaryArray {
     public static void merge(Comparable[] arr) {
         int len = arr.length;
 
